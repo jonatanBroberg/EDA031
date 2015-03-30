@@ -50,7 +50,7 @@ int MessageHandler::readIntPar() {
   return readInt();
 }
 
-string MessageHandler::readString() {
+string MessageHandler::readStringPar() {
   int code = readCode();
   string s = "";
   if(code != protocol.PAR_STRING) {
@@ -105,7 +105,7 @@ void MessageHandler::sendIntPar(int par) {
 	sendInt(par);
 }
 
-void MessageHandler::sendString(string s) {
+void MessageHandler::sendStringPar(string s) {
 	unsigned char c = protocol.PAR_STRING;
 	sendByte(c);
 	sendInt(s.size());

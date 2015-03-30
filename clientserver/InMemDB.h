@@ -9,14 +9,15 @@ class InMemDB{
 	public:
 		InMemDB();
 		bool createNewsGroup(const std::string& title);
-		std::vector<std::string> listNewsGroups() const;
-		bool deleteNewsGroup(const std::string& title);
-		std::vector<std::string> listArticles(const std::string& newsGroup) const;
+		std::vector<std::pair<int,std::string>> listNewsGroups() const;
+		bool deleteNewsGroup(const int& title);
+		std::vector<std::pair<int,std::string>> listArticles(const int& newsGroup) const;
 		bool createArticle(const int id, const std::string title, const std::string author, const std::string text);
 		bool deleteArticle();
 		std::string readArticle() const;
 	private:
 		struct Article{
+			int articleID;
 			std::string title;
 			std::string author;
 			std::string text;
@@ -27,7 +28,7 @@ class InMemDB{
 			std::vector<Article> articles;
 		};
 		std::map<int, NewsGroup> newsGroups; //the int is the id which is unique for each group
-		int id;
+		int newsGroupID;
 };
 
 

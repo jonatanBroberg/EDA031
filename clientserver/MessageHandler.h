@@ -16,11 +16,11 @@ class MessageHandler{
 		int readCode();
 		int readInt();
 		int readIntPar();
-		std::string readString();	
+		std::string readStringPar();	
 		void sendCode(int);
 		void sendInt(int);
 		void sendIntPar(int);
-		void sendString(std::string s);
+		void sendStringPar(std::string s);
 
 
 	private:

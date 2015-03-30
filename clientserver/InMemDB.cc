@@ -3,7 +3,7 @@
 using namespace std;
 
 InMemDB::InMemDB(){
-	
+	newsGroupID = 0;
 }
 
 bool InMemDB::createNewsGroup(const string& title){
@@ -12,23 +12,40 @@ bool InMemDB::createNewsGroup(const string& title){
 		return false;
 	}
 	InMemDB::NewsGroup ng(title);
-	++id;
-	newsGroups.insert(make_pair(id, ng));
+	newsGroups.insert(make_pair(++newsGroupID, ng));
 	return true;
 }
-vector<string> InMemDB::listNewsGroups() const{
-	vector<string> tmp(2, " test ");
-	return tmp;
+vector<pair<int,string>> InMemDB::listNewsGroups() const{
+	vector<pair<int, string>> groups;
+	for(auto tmp : newsGroups){
+		groups.push_back(make_pair(tmp.first, tmp.second.title));	
+	}
+	return groups;
 }
-bool InMemDB::deleteNewsGroup(const string& title){
-	return false;
+bool InMemDB::deleteNewsGroup(const int& ngID){
+	auto it = newsGroups.find(ngID);
+	if(it == newsGroups.end()){
+		return false;
+	}
+	newsGroups.erase(it);
+	return true;
 }
-vector<string> InMemDB::listArticles(const string& newsGroup) const{
-	vector<string> tmp(2, " test ");
-	return tmp;
+vector<pair<int, string>> InMemDB::listArticles(const int& ngID) const{
+	vector<pair<int, string>> articleList;
+	auto it = newsGroups.find(ngID);
+	if(it == newsGroups.end()){
+		return articleList;
+	}
+	for(auto article : it->second.articles){
+		articleList.push_back(make_pair(article.articleID, article.title));
+	}
+	return articleList;
 }
-bool InMemDB::createArticle(const int id, const string title, const string author, const string text){
-	return false;
+bool InMemDB::createArticle(const int ngID, const string title, const string author, const string text){
+	auto it = newsGroups.find(ngID);
+	if(it == newsGroups.end()){
+		return false;
+	}
 }
 bool InMemDB::deleteArticle(){
 	return false;
