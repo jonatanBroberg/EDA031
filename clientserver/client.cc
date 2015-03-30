@@ -2,10 +2,15 @@
 #include <string>
 #include <stdexcept>
 #include <cstdlib>
+#include <vector>
+#include <utility>
+#include <memory>
+#include <algorithm>
 
 #include "connection.h"
 #include "connectionclosedexception.h"
 #include "protocol.h"
+#include "MessageHandler.h"
 
 using namespace std;
 
@@ -55,7 +60,9 @@ int main(int argc, char* argv[]) {
    * 3. Delete newsgroup 4. List articles in current newsgroup
    * 5. Create article 6. Delete article 7. Exit
    */
-  MessageHandler mh(conn);
+	
+	shared_ptr<Connection> connection(conn);
+  MessageHandler mh(connection);
   Protocol protocol;
   vector<pair<string, int>> newsGroups;
   cout << "Welcome!" << endl;
@@ -117,6 +124,7 @@ int main(int argc, char* argv[]) {
 			cerr << "Wrong answer from server" << endl;
 			exit(1);
 		}
+		}
 	}else if(com == "deleteNG"){
 
 	}else if(com == "createART"){
@@ -131,33 +139,7 @@ int main(int argc, char* argv[]) {
 		cerr << "Undefined commando..." << endl;
 	}
 
-    case 1:
-		mh.sendCode(protocol.COM_LIST_NG);
-		mh.sendCode(protocol.COM_END);
-      break;
-    case 2:
-		
-      //createNewsgroup();
-      break;
-    case 3:
-      //deleteNewsgroup();
-      break;
-    case 4:
-      //listArticles();
-      break;
-    case 5:
-      //createArticle();
-      break;
-    case 6:
-      //deleteArticle();
-      break;
-    case 7:
-      exit(1);
-      break;
-    default:
-      cerr << "Unknown command" << endl;
-      break;
-    }
+
   }
   return 0;
     
@@ -168,14 +150,4 @@ void errMsgExit(string errMsg, ostream& errOut) {
   exit(1);
 }
 
-int userInput(ostream& out, istream& in) {
-  
-  out << "1. List newsgroups\n2. Create newsgroup\n3. Delete newsgroup\n"
-      << "4. List articles\n5. Create article\n6. Delete article\n7. Exit\n"
-      << endl;
-  string com1;
-	
-  
-  return input;
-  
-}
+
