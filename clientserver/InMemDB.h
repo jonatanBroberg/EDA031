@@ -4,17 +4,18 @@
 #include <map>
 #include <vector>
 #include <string>
+#include "Database.h"
 
-class InMemDB{
+class InMemDB : public Database{
 	public:
 		InMemDB();
-		bool createNewsGroup(const std::string& title);
-		std::vector<std::pair<int,std::string>> listNewsGroups() const;
-		bool deleteNewsGroup(const int& title);
-		std::vector<std::pair<int,std::string>> listArticles(const int& newsGroup) const;
-		bool createArticle(const int& id, const std::string& title, const std::string& author, const std::string& text);
-		bool deleteArticle();
-		std::string readArticle() const;
+		virtual bool createNewsGroup(const std::string& title);
+		virtual std::vector<std::pair<int,std::string>> listNewsGroups() const;
+		virtual bool deleteNewsGroup(const int& title);
+		virtual std::vector<std::pair<int,std::string>> listArticles(const int& newsGroup) const;
+		virtual bool createArticle(const int& id, const std::string& title, const std::string& author, const std::string& text);
+		virtual bool deleteArticle();
+		virtual std::string readArticle() const;
 	private:
 		struct Article{
 			Article(int id, std::string t, std::string a, std::string te) : articleID(id), title(t), author(a), text(te){} 

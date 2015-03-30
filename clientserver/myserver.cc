@@ -48,28 +48,44 @@ int main(int argc, char* argv[]) {
 			MessageHandler mh(conn);
 			int code = mh.readCode();
 			Protocol protocol;
+		    
+		//	Database database;
 			
 			switch(code){
-				case 1:
+				case protocol.COM_LIST_NG:
 					mh.sendCode(protocol.ANS_LIST_NG);
+		//			database.listNewsGroups()
+					mh.sendCode(protocol.ANS_END);
 					break;
-				case 2:
-				
+				case protocol.COM_CREATE_NG:
+					mh.sendCode(protocol.ANS_CREATE_NG);
+					//
+					mh.sendCode(protocol.ANS_END);
 					break;
-				case 3:
+				case protocol.COM_DELETE_NG:
+					mh.sendCode(protocol.ANS_DELETE_NG);
 				
+					mh.sendCode(protocol.ANS_END);
 					break;
-				case 4:
+				case protocol.COM_LIST_ART:
+					mh.sendCode(protocol.ANS_LIST_ART);
 				
+					mh.sendCode(protocol.ANS_END);
 					break;
-				case 5:
+				case protocol.COM_CREATE_ART:
+					mh.sendCode(protocol.ANS_CREATE_ART);
 				
+					mh.sendCode(protocol.ANS_END);
 					break;
-				case 6:
+				case protocol.COM_DELETE_ART:
+						mh.sendCode(protocol.ANS_DELETE_ART);
 				
+					mh.sendCode(protocol.ANS_END);
 					break;
-				case 7:
+				case protocol.COM_GET_ART:
+					mh.sendCode(protocol.ANS_GET_ART);
 				
+					mh.sendCode(protocol.ANS_END);
 					break;
 				default:
 					cerr << "There is no such commando, exiting..." << endl;
