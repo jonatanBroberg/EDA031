@@ -38,3 +38,5 @@
 *.d~
 *.o~
 Makefile~
+client
+myserver
