@@ -4,6 +4,7 @@
 #include "MessageHandler.h"
 #include "protocol.h"
 #include "InMemDB.h"
+#include "FileDB.h"
 
 #include <memory>
 #include <iostream>
@@ -45,6 +46,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	InMemDB db;
+	FileDB dDB;
 	Protocol protocol;
 			
 	while(true) {

@@ -9,7 +9,7 @@
 
 class FileDB : public Database {
 	public:
-		FIleDB();
+		FileDB();
 	//	virtual ~FileDB();
 		virtual bool createNewsGroup(const std::string& title);
 		virtual std::vector<std::pair<int,std::string>> listNewsGroups() const;
@@ -19,7 +19,7 @@ class FileDB : public Database {
 		virtual int deleteArticle(int ngID, int artID);
 		virtual std::vector<std::string> readArticle(int ngID, int artID) const;
 	private:
-		string root;
+		std::string root;
 		
 };
 

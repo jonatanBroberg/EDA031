@@ -1,9 +1,14 @@
 #include "FileDB.h"
 #include <algorithm>
+#include <string>
+#include <sys/stat.h>
+ #include <sys/types.h>
+ 
 using namespace std;
 
 FileDB::FileDB(){
-	
+	root = "/home/testfolderForProjectInCPP";
+	mkdir("/tmp/testfolderForProjectInCPP", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 }
 
 /*FileDB::~FileDB(){
