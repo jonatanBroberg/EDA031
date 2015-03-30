@@ -41,11 +41,14 @@ vector<pair<int, string>> InMemDB::listArticles(const int& ngID) const{
 	}
 	return articleList;
 }
-bool InMemDB::createArticle(const int ngID, const string title, const string author, const string text){
+bool InMemDB::createArticle(const int& ngID, const string& title, const string& author, const string& text){
 	auto it = newsGroups.find(ngID);
 	if(it == newsGroups.end()){
 		return false;
 	}
+	InMemDB::Article article(it->second.articles.size() + 1, title, author, text);
+	it->second.articles.push_back(article);
+	return true;
 }
 bool InMemDB::deleteArticle(){
 	return false;
