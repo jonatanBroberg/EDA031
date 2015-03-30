@@ -5,11 +5,12 @@
 #include <vector>
 #include <string>
 #include "Database.h"
+#include <utility>
 
 class InMemDB : public Database {
 	public:
 		InMemDB();
-		virtual ~InMemDB();
+	//	virtual ~InMemDB();
 		virtual bool createNewsGroup(const std::string& title);
 		virtual std::vector<std::pair<int,std::string>> listNewsGroups() const;
 		virtual bool deleteNewsGroup(const int& title);

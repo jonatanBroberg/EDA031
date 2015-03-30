@@ -6,9 +6,9 @@ InMemDB::InMemDB(){
 	newsGroupID = 0;
 }
 
-InMemDB::~InMemDB(){
+/*InMemDB::~InMemDB(){
 }
-
+*/
 bool InMemDB::createNewsGroup(const string& title){
 	auto it = find_if(newsGroups.begin(), newsGroups.end(), [&title](pair<int, NewsGroup> p){return p.second.title == title;});
 	if(it != newsGroups.end()){

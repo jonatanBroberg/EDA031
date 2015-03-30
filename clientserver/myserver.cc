@@ -44,28 +44,38 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
+	InMemDB db;
+	Protocol protocol;
+			
 	while(true) {
 	  auto conn = server.waitForActivity();
 	  if(conn != nullptr) {
 	    try {
-			MessageHandler mh(conn);
+	    	MessageHandler mh(conn);
 			int code = mh.readCode();
-			Protocol protocol;
-		    
-			InMemDB db;
 			
 			switch(code){
 				case protocol.COM_LIST_NG:
-					mh.sendCode(protocol.ANS_LIST_NG);
-					vector<pair<int,string>> newsGroups = db.listNewsGroups();
-					mh.sendIntPar(newsGroups.size());
-					for_each(newsGroups.begin(), newsGroups.end(), [&mh] (pair<int, string> p) {mh.sendIntPar(p.first); mh.sendStringPar(p.second);});
-					mh.sendCode(protocol.ANS_END);
+					{
+						mh.sendCode(protocol.ANS_LIST_NG);
+						vector<pair<int, string>> NGs = db.listNewsGroups();
+						mh.sendIntPar(NGs.size());
+						for_each(NGs.begin(), NGs.end(), [&mh] (pair<int, string> p) {mh.sendIntPar(p.first); mh.sendStringPar(p.second);});
+						mh.sendCode(protocol.ANS_END);
+					}
 					break;
 				case protocol.COM_CREATE_NG:
-					mh.sendCode(protocol.ANS_CREATE_NG);
-					//
-					mh.sendCode(protocol.ANS_END);
+					{
+						mh.sendCode(protocol.ANS_CREATE_NG);
+						string name = mh.readStringPar();
+						if(db.createNewsGroup(name)){
+							mh.sendCode(protocol.ANS_ACK);							
+						} else {
+							mh.sendCode(protocol.ANS_NAK);
+							mh.sendCode(protocol.ERR_NG_ALREADY_EXISTS);
+						}
+						mh.sendCode(protocol.ANS_END);
+					}
 					break;
 				case protocol.COM_DELETE_NG:
 					mh.sendCode(protocol.ANS_DELETE_NG);
@@ -73,9 +83,11 @@ int main(int argc, char* argv[]) {
 					mh.sendCode(protocol.ANS_END);
 					break;
 				case protocol.COM_LIST_ART:
-					mh.sendCode(protocol.ANS_LIST_ART);
-				
-					mh.sendCode(protocol.ANS_END);
+					{
+						mh.sendCode(protocol.ANS_LIST_ART);
+						int groupID = mh.readIntPar();
+						mh.sendCode(protocol.ANS_END);
+					}
 					break;
 				case protocol.COM_CREATE_ART:
 					mh.sendCode(protocol.ANS_CREATE_ART);
@@ -92,6 +104,9 @@ int main(int argc, char* argv[]) {
 				
 					mh.sendCode(protocol.ANS_END);
 					break;
+				case protocol.COM_END:
+				
+					break;	
 				default:
 					cerr << "There is no such commando, exiting..." << endl;
 					exit(1);
