@@ -12,11 +12,12 @@ class InMemDB{
 		std::vector<std::pair<int,std::string>> listNewsGroups() const;
 		bool deleteNewsGroup(const int& title);
 		std::vector<std::pair<int,std::string>> listArticles(const int& newsGroup) const;
-		bool createArticle(const int id, const std::string title, const std::string author, const std::string text);
+		bool createArticle(const int& id, const std::string& title, const std::string& author, const std::string& text);
 		bool deleteArticle();
 		std::string readArticle() const;
 	private:
 		struct Article{
+			Article(int id, std::string t, std::string a, std::string te) : articleID(id), title(t), author(a), text(te){} 
 			int articleID;
 			std::string title;
 			std::string author;
