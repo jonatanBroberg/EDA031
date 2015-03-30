@@ -6,7 +6,7 @@
 #include <string>
 #include "Database.h"
 
-class InMemDB : public Database{
+class InMemDB : public Database {
 	public:
 		InMemDB();
 		virtual bool createNewsGroup(const std::string& title);

@@ -10,6 +10,9 @@
 #include <string>
 #include <stdexcept>
 #include <cstdlib>
+#include <vector>
+#include <utility>
+#include <algorithm>
 
 using namespace std;
 
@@ -49,12 +52,14 @@ int main(int argc, char* argv[]) {
 			int code = mh.readCode();
 			Protocol protocol;
 		    
-		//	Database database;
+			InMemDB db;
 			
 			switch(code){
 				case protocol.COM_LIST_NG:
 					mh.sendCode(protocol.ANS_LIST_NG);
-		//			database.listNewsGroups()
+					vector<pair<int,string>> newsGroups = db.listNewsGroups();
+					mh.sendIntPar(newsGroups.size());
+					for_each(newsGroups.begin(), newsGroups.end(), [&mh] (pair<int, string> p) {mh.sendIntPar(p.first); mh.sendStringPar(p.second);});
 					mh.sendCode(protocol.ANS_END);
 					break;
 				case protocol.COM_CREATE_NG:
