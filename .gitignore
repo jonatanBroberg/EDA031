@@ -33,3 +33,8 @@
 
 #More shit
 *.d
+*.cc~
+*.h~
+*.d~
+*.o~
+Makefile~
