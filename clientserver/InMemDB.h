@@ -27,11 +27,12 @@ class InMemDB : public Database {
 			std::string text;
 		};
 		struct NewsGroup{
-			NewsGroup(std::string t) : title(t){}
+			NewsGroup(std::string t) : title(t) {nextArtID = 0;}
+			int nextArtID;
 			std::string title;
 			std::vector<Article> articles;
 		};
-		std::map<int, NewsGroup> newsGroups; //the int is the id which is unique for each group
+		std::map<int, NewsGroup> newsGroups; 	//the int is the id which is unique for each group
 		int newsGroupID;
 };
 

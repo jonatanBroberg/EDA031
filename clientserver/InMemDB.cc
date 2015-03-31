@@ -18,6 +18,7 @@ bool InMemDB::createNewsGroup(const string& title){
 	newsGroups.insert(make_pair(++newsGroupID, ng));
 	return true;
 }
+
 vector<pair<int,string>> InMemDB::listNewsGroups() const{
 	vector<pair<int, string>> groups;
 	for(auto tmp : newsGroups){
@@ -25,6 +26,7 @@ vector<pair<int,string>> InMemDB::listNewsGroups() const{
 	}
 	return groups;
 }
+
 bool InMemDB::deleteNewsGroup(const int& ngID){
 	auto it = newsGroups.find(ngID);
 	if(it == newsGroups.end()){
@@ -33,6 +35,7 @@ bool InMemDB::deleteNewsGroup(const int& ngID){
 	newsGroups.erase(it);
 	return true;
 }
+
 vector<pair<int, string>> InMemDB::listArticles(const int& ngID) const{
 	vector<pair<int, string>> articleList;
 	auto it = newsGroups.find(ngID);
@@ -45,15 +48,17 @@ vector<pair<int, string>> InMemDB::listArticles(const int& ngID) const{
 	}
 	return articleList;
 }
+
 bool InMemDB::createArticle(const int& ngID, const string& title, const string& author, const string& text){
 	auto it = newsGroups.find(ngID);
 	if(it == newsGroups.end()){
 		return false;
 	}
-	InMemDB::Article article(it->second.articles.size() + 1, title, author, text);
+	InMemDB::Article article(++(it->second.nextArtID), title, author, text);
 	it->second.articles.push_back(article);
 	return true;
 }
+
 int InMemDB::deleteArticle(int ngID, int artID){
 	auto ng = newsGroups.find(ngID);
 	if(ng == newsGroups.end()){
@@ -66,6 +71,7 @@ int InMemDB::deleteArticle(int ngID, int artID){
 	ng->second.articles.erase(article);
 	return 1;
 }
+
 vector<string> InMemDB::readArticle(int ngID, int artID) const{
 	vector<string> artInfo;
 	auto ng = newsGroups.find(ngID);
