@@ -46,6 +46,9 @@ int main(int argc, char* argv[]) {
    * Create a connection. Close the program if it fails
    */
   Connection conn(argv[1], port);
+  //auto connection = make_shared<Connection>(argv[1], port);
+  shared_ptr<Connection> connection(new Connection(argv[1], port));
+  //shared_ptr<Connection> connection(&conn);
   if(!conn.isConnected()) {
     /*
      * Uncomment when server exists
@@ -60,9 +63,9 @@ int main(int argc, char* argv[]) {
    * 3. Delete newsgroup 4. List articles in current newsgroup
    * 5. Create article 6. Delete article 7. Exit
    */
+//	conn = make_shared<Connection>();
 	
-	shared_ptr<Connection> connection(conn);
-  MessageHandler mh(connection);
+ 	MessageHandler mh(connection);
   Protocol protocol;
   vector<pair<string, int>> newsGroups;
   cout << "Welcome!" << endl;

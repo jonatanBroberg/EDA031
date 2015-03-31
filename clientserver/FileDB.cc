@@ -8,13 +8,14 @@ using namespace std;
 
 FileDB::FileDB(){
 	root = "/home/testfolderForProjectInCPP";
-	mkdir("/tmp/testfolderForProjectInCPP", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	mkdir(root, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 }
 
 /*FileDB::~FileDB(){
 }
 */
 bool FileDB::createNewsGroup(const string& title){
+
 	return true;
 }
 
