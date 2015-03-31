@@ -45,8 +45,10 @@ int main(int argc, char* argv[]) {
   /*
    * Create a connection. Close the program if it fails
    */
-  Connection conn(argv[1], port);
-  if(!conn.isConnected()) {
+  shared_ptr<Connection> conn = make_shared<Connection>(argv[1], port);
+  // Connection c = *(conn.get());
+  // ( *connection)(argv[1], port);
+  if(!(conn.get())->isConnected()) {
     /*
      * Uncomment when server exists
      errMsgExit("Connection attempt failed", cerr);
@@ -61,8 +63,9 @@ int main(int argc, char* argv[]) {
    * 5. Create article 6. Delete article 7. Exit
    */
 	
-	shared_ptr<Connection> connection(conn);
-  MessageHandler mh(connection);
+  // Connection *c = &conn;
+  // shared_ptr<Connection> connection(c);
+  MessageHandler mh(conn);
   Protocol protocol;
   vector<pair<string, int>> newsGroups;
   cout << "Welcome!" << endl;
