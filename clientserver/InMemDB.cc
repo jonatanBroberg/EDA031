@@ -37,6 +37,7 @@ vector<pair<int, string>> InMemDB::listArticles(const int& ngID) const{
 	vector<pair<int, string>> articleList;
 	auto it = newsGroups.find(ngID);
 	if(it == newsGroups.end()){
+	  articleList.push_back(make_pair(0,""));
 		return articleList;
 	}
 	for(auto article : it->second.articles){
