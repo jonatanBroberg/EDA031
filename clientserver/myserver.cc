@@ -45,8 +45,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	InMemDB db;
-	FileDB dDB;
+//	InMemDB db;
+	FileDB db;
 	Protocol protocol;
 			
 	while(true) {
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 							mh.sendCode(protocol.ERR_NG_DOES_NOT_EXIST);
 						}
 						mh.sendCode(protocol.ANS_END);
-					}operator=
+					}
 					break;
 				case protocol.COM_DELETE_ART:
 					{

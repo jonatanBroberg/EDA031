@@ -19,8 +19,8 @@ class FileDB : public Database {
 		virtual int deleteArticle(int ngID, int artID);
 		virtual std::vector<std::string> readArticle(int ngID, int artID) const;
 	private:
-		std::char* root;
-		
+		std::string root = "/tmp/NewsGroup";
+		int newsGroupID;
 };
 
 
