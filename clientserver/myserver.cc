@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
 						int ngID = mh.readIntPar();
 						mh.sendCode(protocol.ANS_LIST_ART);
 						vector<pair<int,string>> arts = db.listArticles(ngID);
-						if(arts.size() == 0){
+						if(arts.size() == 1 && arts[0].first == 0){
 							mh.sendCode(protocol.ANS_NAK);
 							mh.sendCode(protocol.ERR_NG_DOES_NOT_EXIST);
 						} else {
