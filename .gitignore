@@ -38,5 +38,5 @@
 *.d~
 *.o~
 Makefile~
-client
-myserver
+clientserver/client
+clientserver/myserver
