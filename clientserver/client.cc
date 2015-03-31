@@ -6,6 +6,7 @@
 #include <utility>
 #include <memory>
 #include <algorithm>
+#include <sstream>
 
 #include "connection.h"
 #include "connectionclosedexception.h"
@@ -205,7 +206,19 @@ int main(int argc, char* argv[]) {
 	cout << "Please select a newsgroup." << endl;
       }else{
 	string title, author, text;
-	cin >> title >> author >> text;
+	string line;
+	getline(cin, line);
+	cout << line << endl;
+	stringstream ss(line);
+	ss >> title;
+	ss >> author;
+	auto space1 = line.find(" ");
+	string sub = line.substr(space1 + 1, string::npos);
+	auto space2 = sub.find(" ");
+	string sub2 = sub.substr(space2 + 1, string::npos);
+	auto space3 = sub2.find(" ");
+	text = sub2.substr(space3 + 1, string::npos);
+
 	mh.sendCode(protocol.COM_CREATE_ART);
 	mh.sendIntPar(selectedNG.second);
 	mh.sendStringPar(title);
