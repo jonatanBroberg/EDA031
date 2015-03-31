@@ -45,6 +45,7 @@ int main(int argc, char* argv[]) {
   /*
    * Create a connection. Close the program if it fails
    */
+
   shared_ptr<Connection> conn = make_shared<Connection>(argv[1], port);
   if(!(conn.get())->isConnected()) {
     /*
@@ -60,6 +61,7 @@ int main(int argc, char* argv[]) {
    * 3. Delete newsgroup 4. List articles in current newsgroup
    * 5. Create article 6. Delete article 7. Exit
    */
+//	conn = make_shared<Connection>();
 	
   MessageHandler mh(conn);
   Protocol protocol;
