@@ -45,8 +45,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-//	InMemDB db;
-	FileDB db;
+	InMemDB db;
+//	FileDB db;
 	Protocol protocol;
 			
 	while(true) {
