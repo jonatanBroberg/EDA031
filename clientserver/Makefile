@@ -17,12 +17,14 @@ CXXFLAGS += -g
 #CPPFLAGS =  -stdlib=libc++
 #CXXFLAGS += -stdlib=libc++
 
-PROGS = client myserver
+
+PROGS = client inmemserver fileserver
 
 all: libclientserver.a $(PROGS)
 
 client: client.o connection.o MessageHandler.o
-myserver: myserver.o MessageHandler.o connection.o server.o InMemDB.o FileDB.o
+inmemserver: inmemserver.o MessageHandler.o connection.o server.o InMemDB.o
+fileserver: fileserver.o MessageHandler.o connection.o server.o FileDB.o
 # Create the library; ranlib is for Darwin (OS X) and maybe other systems.
 # Doesn't seem to do any damage on other systems.
 
@@ -32,7 +34,14 @@ libclientserver.a: connection.o server.o
 	ranlib libclientserver.a
 
 # Phony targets
-.PHONY: all clean
+.PHONY: all clean install
+
+:all $(PROGS)
+
+# Install
+install: all
+	mkdir -p bin
+	cp $(PROGS) ./bin
 
 # Standard clean
 clean:

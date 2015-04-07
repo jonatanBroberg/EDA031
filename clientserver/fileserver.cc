@@ -3,7 +3,6 @@
 #include "connectionclosedexception.h"
 #include "MessageHandler.h"
 #include "protocol.h"
-#include "InMemDB.h"
 #include "FileDB.h"
 
 #include <memory>
@@ -37,8 +36,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	InMemDB db;
-//	FileDB db; //Change type of DB here
+
+	FileDB db;
 
 	Protocol protocol;
 			
