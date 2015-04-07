@@ -17,14 +17,6 @@
 
 using namespace std;
 
-int readNumber(const shared_ptr<Connection>& conn) {
-	unsigned char byte1 = conn->read();
-	unsigned char byte2 = conn->read();
-	unsigned char byte3 = conn->read();
-	unsigned char byte4 = conn->read();
-	return (byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4;
-}
-
 int main(int argc, char* argv[]) {
   if (argc != 2) {
 		cerr << "Usage: myserver port-number" << endl;
@@ -46,7 +38,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	InMemDB db;
-//	FileDB db;
+//	FileDB db; //Change type of DB here
+
 	Protocol protocol;
 			
 	while(true) {

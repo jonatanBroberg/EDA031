@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
   vector<pair<string, int>> newsGroups;
   pair<string, int> selectedNG = make_pair("",0);
   cout << "Welcome!" << endl;
-  cout << "Available commands: \nlistNewsgroups \ncreateNewsgroup [name] \ndeleteNewsgroup [name] \nselect [newsgroup name] \nlistArticles \ncreateArticle [title author text] \ndeleteArticle [article ID] \nreadArticle[article ID] \nexit" << endl;
+  cout << "Available commands: \n--listNewsgroups \n--createNewsgroup \n--deleteNewsgroup \n--select \n--listArticles \n--createArticle \n--deleteArticle \n--readArticle \n--exit  \n----You need to select a group before doing anything with the articles----" << endl;
   while(true) {  
     string com;
 	cin >> com;
