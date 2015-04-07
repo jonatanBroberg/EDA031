@@ -23,13 +23,9 @@ PROGS = client inmemserver fileserver
 all: libclientserver.a $(PROGS)
 
 client: client.o connection.o MessageHandler.o
-<<<<<<< HEAD
-myserver: myserver.o MessageHandler.o connection.o server.o InMemDB.o FileDB.o
-#myserverOnDisk: myserver.o MessageHandler.o connection.o server.o InMemDB.o FileDB.o
-=======
 inmemserver: inmemserver.o MessageHandler.o connection.o server.o InMemDB.o
 fileserver: fileserver.o MessageHandler.o connection.o server.o FileDB.o
->>>>>>> b59e4483cf86116db8651e971b885583e9074c44
+
 # Create the library; ranlib is for Darwin (OS X) and maybe other systems.
 # Doesn't seem to do any damage on other systems.
 
