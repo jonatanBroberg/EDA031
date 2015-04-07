@@ -41,7 +41,7 @@ libclientserver.a: connection.o server.o
 # Install
 install: all
 	mkdir -p bin
-	cp /clientserver/$(PROGS) ./bin
+	cp $(PROGS) ./bin
 
 # Standard clean
 clean:
