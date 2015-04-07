@@ -23,6 +23,7 @@ all: libclientserver.a $(PROGS)
 
 client: client.o connection.o MessageHandler.o
 myserver: myserver.o MessageHandler.o connection.o server.o InMemDB.o FileDB.o
+#myserverOnDisk: myserver.o MessageHandler.o connection.o server.o InMemDB.o FileDB.o
 # Create the library; ranlib is for Darwin (OS X) and maybe other systems.
 # Doesn't seem to do any damage on other systems.
 
