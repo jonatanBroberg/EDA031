@@ -4,6 +4,7 @@
 #include "MessageHandler.h"
 #include "protocol.h"
 #include "InMemDB.h"
+#include "FileDB.h"
 
 #include <memory>
 #include <iostream>
@@ -15,6 +16,14 @@
 #include <algorithm>
 
 using namespace std;
+
+int readNumber(const shared_ptr<Connection>& conn) {
+	unsigned char byte1 = conn->read();
+	unsigned char byte2 = conn->read();
+	unsigned char byte3 = conn->read();
+	unsigned char byte4 = conn->read();
+	return (byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4;
+}
 
 int main(int argc, char* argv[]) {
   if (argc != 2) {
@@ -36,13 +45,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-<<<<<<< HEAD:clientserver/myserver.cc
 //	InMemDB db;
 	FileDB db;
-=======
-	InMemDB db;
-
->>>>>>> b59e4483cf86116db8651e971b885583e9074c44:clientserver/inmemserver.cc
 	Protocol protocol;
 			
 	while(true) {
