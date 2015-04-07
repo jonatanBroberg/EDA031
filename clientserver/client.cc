@@ -198,15 +198,15 @@ int main(int argc, char* argv[]) {
 	  if(mh.readCode() != protocol.ANS_END) {
 	    cerr << "Wrong answer from server" << endl;
 	    exit(1);
-	  }
+		}
 	}
-      }
+	}
     }else if(com == "createArticle"){
-      if(selectedNG.second == 0){
-	cout << "Please select a newsgroup." << endl;
-      }else{
+   		if(selectedNG.second == 0){
+			cout << "Please select a newsgroup." << endl;
+		}else{
 	string title, author, text;
-	string line;
+/*	string line;
 	getline(cin, line);
 	cout << line << endl;
 	stringstream ss(line);
@@ -218,7 +218,19 @@ int main(int argc, char* argv[]) {
 	string sub2 = sub.substr(space2 + 1, string::npos);
 	auto space3 = sub2.find(" ");
 	text = sub2.substr(space3 + 1, string::npos);
-
+*/	
+	
+	//Tesst
+	
+	cout << "Title: ";
+	string commandline;
+	getline(cin, commandline);
+	getline(cin, title);
+	cout << "Author: ";
+	getline(cin, author);
+	cout << "Text: ";
+	getline(cin, text);
+	
 	mh.sendCode(protocol.COM_CREATE_ART);
 	mh.sendIntPar(selectedNG.second);
 	mh.sendStringPar(title);
