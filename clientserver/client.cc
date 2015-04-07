@@ -52,6 +52,7 @@ int main(int argc, char* argv[]) {
 		/*
 		 * Uncomment when server exists
      errMsgExit("Connection attempt failed", cerr);
+<<<<<<< HEAD
 		 */
 
 		//For testing
@@ -74,6 +75,30 @@ int main(int argc, char* argv[]) {
 		string com;
 		cin >> com;
 	if(com == "listNewsgroups") {
+=======
+    */
+    
+    //For testing
+    cerr << "Connection attempt failed" << endl;
+  }
+  /*
+   * Commands: 1. List News group 2. Create newsgroup
+   * 3. Delete newsgroup 4. List articles in current newsgroup
+   * 5. Create article 6. Delete article 7. Exit
+   */
+//	conn = make_shared<Connection>();
+	
+  MessageHandler mh(conn);
+  Protocol protocol;
+  vector<pair<string, int>> newsGroups;
+  pair<string, int> selectedNG = make_pair("",0);
+  cout << "Welcome!" << endl;
+  cout << "Available commands: \n--listNewsgroups \n--createNewsgroup \n--deleteNewsgroup \n--select \n--listArticles \n--createArticle \n--deleteArticle \n--readArticle \n--exit  \n----You need to select a group before doing anything with the articles----" << endl;
+  while(true) {  
+    string com;
+	cin >> com;
+    if(com == "listNewsgroups") {
+>>>>>>> b59e4483cf86116db8651e971b885583e9074c44
 		mh.sendCode(protocol.COM_LIST_NG);
 		mh.sendCode(protocol.COM_END);
 		if(mh.readCode() != protocol.ANS_LIST_NG){
