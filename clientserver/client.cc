@@ -220,8 +220,6 @@ int main(int argc, char* argv[]) {
 	text = sub2.substr(space3 + 1, string::npos);
 */	
 	
-	//Tesst
-	
 	cout << "Title: ";
 	string commandline;
 	getline(cin, commandline);
